@@ -46,7 +46,19 @@ node updater/updater.mjs export /tmp/database;
 ```
 
 
+# Usage
+
+The [updater/updater.mjs](./updater/updater.mjs) is used to scrape all supported security
+trackers and to export all vulnerabilities to the [vulnerabilities](https://github.com/tholian-network/vulnerabilities)
+repository on a regular basis.
+
+1. Run the `update` action in order to download/scrape the security tracker data.
+2. Run the `export` action which merges everything together.
+3. Commit all changes in the message format `:package: YYYY-MM-DD".
+4. Push all changes to the `vulnerabilities` repository.
+
+
 # License
 
-This tool is licensed via the [Affero AGPL 3.0](./AGPL-3.0.txt) license.
+This tool is licensed via the [GNU Affero GPL 3.0](./AGPL-3.0.txt) license.
 
