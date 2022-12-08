@@ -108,6 +108,7 @@ const ENVIRONMENT = {
 
 	action: action,
 	flags:  flags,
+	folder: folder,
 	root:   root
 
 };

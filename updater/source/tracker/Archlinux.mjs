@@ -361,7 +361,7 @@ Archlinux.prototype = Object.assign({}, Emitter.prototype, {
 		console.info('Archlinux: Update');
 
 
-		this.webscraper.request('https://security.archlinux.org/all.json', (data) => {
+		this.webscraper.request('https://security.archlinux.org/issues/all.json', (data) => {
 
 			if (isArray(data) === true) {
 

@@ -39,10 +39,15 @@ const show_help = () => {
 	console.log('    -----------|---------|------------------|-------------------------------------------------------------------------------');
 	console.log('    --insecure | false   | true, false      | If set, assumes an SSL-intercepted network and accepts any Snakeoil CA certs. ');
 	console.log('');
+	console.log('Available Trackers:');
+	Updater.TRACKERS.map((id) => {
+		console.log('    ' + id);
+	});
+	console.log('');
 	console.log('Examples:');
 	console.log('');
 	console.log('    updater update;');
-	console.log('    updater export --trackers="Debian,Archlinux"');
+	console.log('    updater export --trackers="Archlinux,Debian"');
 	console.log('');
 	console.log('    updater update --debug=true /tmp/vulnerabilities;');
 	console.log('');

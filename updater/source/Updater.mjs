@@ -4,22 +4,20 @@ import process from 'process';
 import { console, Emitter, isObject, isString } from '../extern/base.mjs';
 import { ENVIRONMENT                          } from '../source/ENVIRONMENT.mjs';
 import { Database                             } from '../source/Database.mjs';
-import { Alpine                               } from '../source/tracker/Alpine.mjs';
 import { Archlinux                            } from '../source/tracker/Archlinux.mjs';
 import { CVE                                  } from '../source/tracker/CVE.mjs';
 import { CISA                                 } from '../source/tracker/CISA.mjs';
 import { Debian                               } from '../source/tracker/Debian.mjs';
-// import { Ubuntu                               } from '../source/tracker/Ubuntu.mjs';
-// import { Microsoft                            } from '../source/tracker/Microsoft.mjs';
+import { Microsoft                            } from '../source/tracker/Microsoft.mjs';
 
 
 
 const CONSTRUCTORS = [
 	CVE,
 	CISA,
-	Alpine,
 	Archlinux,
-	Debian
+	Debian,
+	Microsoft
 ];
 
 const TRACKERS = CONSTRUCTORS.map((Constructor) => Constructor.prototype[Symbol.toStringTag]);
@@ -85,7 +83,7 @@ const Updater = function(settings) {
 		TRACKERS.forEach((name, c) => {
 
 			if (this._settings.trackers.includes(name) === true) {
-				this.trackers.push(new CONSTRUCTORS[c](this.vulnerabilities, this));
+				this.trackers.push(new CONSTRUCTORS[c](this.database, this));
 			}
 
 		});
@@ -145,11 +143,11 @@ const Updater = function(settings) {
 
 		let action = this._settings.action || null;
 		if (action === 'clean') {
-			this.vulnerabilities.disconnect();
+			this.database.disconnect();
 		} else if (action === 'export') {
-			this.vulnerabilities.disconnect();
+			this.database.disconnect();
 		} else if (action === 'update') {
-			this.vulnerabilities.disconnect();
+			this.database.disconnect();
 		}
 
 		console.info('Updater: Disconnect complete.');
@@ -195,7 +193,7 @@ Updater.prototype = Object.assign({}, Emitter.prototype, {
 			console.info('Updater: Connect');
 
 
-			this.vulnerabilities.connect();
+			this.database.connect();
 
 
 			if (this.trackers.length > 0) {
@@ -271,7 +269,7 @@ Updater.prototype = Object.assign({}, Emitter.prototype, {
 
 			console.info('Updater: Clean');
 
-			this.vulnerabilities.clean();
+			this.database.clean();
 			this.emit('clean');
 
 			return true;
