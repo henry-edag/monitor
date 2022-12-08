@@ -268,7 +268,7 @@ Database.prototype = {
 			console.log('> '   + this.__state['index']['disputed'].length  + ' disputed');
 			console.info('> '  + this.__state['index']['published'].length + ' published');
 
-			filesystem.write('/vulnerabilities/index.json', {
+			this.filesystem.write('/vulnerabilities/index.json', {
 				'disputed':  this.__state['index']['disputed'].sort(),
 				'invalid':   this.__state['index']['invalid'].sort(),
 				'published': this.__state['index']['published'].sort(),

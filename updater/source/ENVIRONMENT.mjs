@@ -16,8 +16,8 @@ const action = (() => {
 
 	if (/^([clean]{5})$/.test(value) === true) {
 		return 'clean';
-	} else if (/^([merge]{5})$/.test(value) === true) {
-		return 'merge';
+	} else if (/^([export]{6})$/.test(value) === true) {
+		return 'export';
 	} else if (/^([update]{6})$/.test(value) === true) {
 		return 'update';
 	}
